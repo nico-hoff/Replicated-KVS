@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package kvs;
+
+// message from a clinet to a server
+message client_msg {
+  enum OperationType {
+    PUT         = 0;
+    GET         = 1;
+    DIRECT_GET  = 2;
+  }
+
+  required int32 id           = 1;
+  required OperationType type = 2;
+  required string key         = 3;
+  optional string value       = 4;
+}
+
+// message from a server to a client
+message server_response {
+  enum Status {
+    OK          = 0;
+    NO_KEY      = 1;
+    ERROR       = 2;
+    NOT_LEADER  = 3;
+  }
+
+  required int32 id = 1;
+  required Status status = 2;
+  // For GET or DIRECT_GET operations
+  optional string value = 3;
+}

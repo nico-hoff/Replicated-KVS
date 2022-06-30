@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "build",
+      "setup": "",
+      "run": "timeout -s9 5m ./build.sh",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Test replication 1",
+      "setup": "",
+      "run": "timeout -s9 10m python3 tests/test_replication.py --num_servers 3 --have_leader_at_startup",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test replication 2",
+      "setup": "",
+      "run": "timeout -s9 10m python3 tests/test_replication.py --num_servers 3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test replication 3",
+      "setup": "",
+      "run": "timeout -s9 10m python3 tests/test_replication.py --num_servers 5",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    }
+  ]
+}

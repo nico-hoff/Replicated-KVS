@@ -1,0 +1,11 @@
+*.o
+*.d
+*.a
+build
+__pycache__/
+*.py[cod]
+*$py.class
+*.swp
+*.swo
+.cache/
+compile_commands.json
