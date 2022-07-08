@@ -31,7 +31,7 @@ include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/extern/include)
 #include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/rocksdb)
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/rocksdb/include)
 #link_directories(${CMAKE_CURRENT_SOURCE_DIR}/rocksdb)
-# link_libraries("-lrocksdb -lz")
+#link_libraries("-lrocksdb -lz")
 #link_libraries("-lz")
 
 set(CMAKE_BUILD_TYPE_COPY "${CMAKE_BUILD_TYPE}")
@@ -78,6 +78,14 @@ add_library(
 set_target_properties(svr_lib PROPERTIES LINKER_LANGUAGE CXX)
 target_compile_features(svr_lib PUBLIC cxx_std_20)
 
+add_library(
+	shared_lib OBJECT
+	source/shared.cpp
+	)
+
+target_compile_features(shared_lib PUBLIC cxx_std_20)
+
+
 # ---- Declare executables ----
 
 add_executable(svr source/server.cpp ${CMAKE_CURRENT_BINARY_DIR}/message.h)
@@ -95,6 +103,7 @@ target_link_libraries(svr
 	PRIVATE
 	clt-svr-proto_lib
 	svr_lib
+	shared_lib
 	${Protobuf_LIBRARIES}
 	fmt::fmt
 	Threads::Threads
@@ -115,6 +124,7 @@ target_compile_features(clt PRIVATE cxx_std_20)
 target_link_libraries(clt
 	PRIVATE
 	clt-svr-proto_lib
+	shared_lib
 	${Protobuf_LIBRARIES}
 	fmt::fmt
 	Threads::Threads)

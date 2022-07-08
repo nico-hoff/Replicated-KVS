@@ -33,3 +33,11 @@ message RequestVoteReply {
   required bool voteGranted = 2;
 }
 
+message TLM { // Top Level Message
+  optional Entry entry = 1;
+  optional AppendEntriesRequest append_request = 2;
+  optional AppendEntriesReply append_reply = 3;
+  optional RequestVoteRequest vote_request = 4;
+  optional RequestVoteReply vote_reply = 5;
+}
+
